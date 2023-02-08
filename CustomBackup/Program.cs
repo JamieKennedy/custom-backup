@@ -31,9 +31,10 @@ static IHost Startup()
 
     // Create the host
     var host = Host.CreateDefaultBuilder()
-        .ConfigureServices((context, services) =>
+        .ConfigureServices((_, services) =>
         {
             // Add services
+            services.AddTransient<IExceptionHandlerService, ExceptionHandlerService>();
             services.AddTransient<IBackupService, BackupService>();
         })
         .UseSerilog()

@@ -1,8 +1,4 @@
-﻿using System.Collections.Immutable;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Serilog;
-
+﻿using Microsoft.Extensions.Configuration;
 namespace CustomBackup
 {
     public static class Extensions
