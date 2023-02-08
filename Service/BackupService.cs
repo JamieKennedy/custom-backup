@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Service.Contracts;
 
 namespace Service
 {
-    public class BackupService
+    public class BackupService : IBackupService
     {
         private readonly IConfiguration _config;
         private readonly ILogger<BackupService> _logger;
@@ -16,7 +17,7 @@ namespace Service
 
         public void Run()
         {
-
+            _logger.LogInformation("Running Backup Service...");
         }
     }
 }

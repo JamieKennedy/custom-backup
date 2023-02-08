@@ -1,9 +1,18 @@
 ﻿using CustomBackup;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Service;
+using Service.Contracts;
 
 var host = Startup();
+
+// Create backup service instance
+var backupService = ActivatorUtilities.CreateInstance<BackupService>(host.Services);
+
+// Run the backup service
+backupService.Run();
 
 static IHost Startup()
 {
@@ -18,9 +27,15 @@ static IHost Startup()
         .Enrich.FromLogContext()
         .CreateLogger();
 
+    Log.Information("Starting Application...");
+
     // Create the host
     var host = Host.CreateDefaultBuilder()
-        .ConfigureServices((context, services) => { })
+        .ConfigureServices((context, services) =>
+        {
+            // Add services
+            services.AddTransient<IBackupService, BackupService>();
+        })
         .UseSerilog()
         .Build();
 
