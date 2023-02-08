@@ -35,6 +35,7 @@ static IHost Startup()
         {
             // Add services
             services.AddTransient<IExceptionHandlerService, ExceptionHandlerService>();
+            services.AddTransient<IConfigManagerService, ConfigManagerService>();
             services.AddTransient<IBackupService, BackupService>();
         })
         .UseSerilog()
